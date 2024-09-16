@@ -17,10 +17,17 @@ def get_items():
     return {"items": items}
 
 
-@app.route("/api/items", methods=["POST"])
-def create_item():
-    new_item = request.get_json()  # Get the new item from the request body
-    return {"item": new_item}, 201  # Return 201 status to indicate creation
+@app.route("/api/items/<int:item_id>", methods=["GET"])
+def get_item(item_id):
+    items = [
+        {"id": 1, "name": "Item 1", "description": "First item"},
+        {"id": 2, "name": "Item 2", "description": "Second item"},
+    ]
+    item = next((i for i in items if i["id"] == item_id), None)
+    if item:
+        return {"item": item}
+    else:
+        return {"message": "Item not found"}, 404
 
 
 if __name__ == "__main__":
