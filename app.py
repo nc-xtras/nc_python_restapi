@@ -23,11 +23,17 @@ def get_item(item_id):
         {"id": 1, "name": "Item 1", "description": "First item"},
         {"id": 2, "name": "Item 2", "description": "Second item"},
     ]
-    item = next((i for i in items if i["id"] == item_id), None)
+    item = next((item for item in items if item["id"] == item_id), None)
     if item:
         return {"item": item}
     else:
         return {"message": "Item not found"}, 404
+
+
+@app.route("/api/items/<int:item_id>", methods=["PUT"])
+def update_item(item_id):
+    updated_item = request.get_json()  # Get the updated item from the request
+    return {"message": f"Item {item_id} updated", "item": updated_item}
 
 
 if __name__ == "__main__":
