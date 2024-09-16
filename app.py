@@ -17,6 +17,12 @@ def get_items():
     return {"items": items}
 
 
+@app.route("/api/items", methods=["POST"])
+def create_item():
+    new_item = request.get_json()  # Get the new item from the request body
+    return {"item": new_item}, 201  # Return 201 status to indicate creation
+
+
 @app.route("/api/items/<int:item_id>", methods=["GET"])
 def get_item(item_id):
     items = [
