@@ -32,8 +32,13 @@ def get_item(item_id):
 
 @app.route("/api/items/<int:item_id>", methods=["PUT"])
 def update_item(item_id):
-    updated_item = request.get_json()  # Get the updated item from the request
+    updated_item = request.get_json()
     return {"message": f"Item {item_id} updated", "item": updated_item}
+
+
+@app.route("/api/items/<int:item_id>", methods=["DELETE"])
+def delete_item(item_id):
+    return {"message": f"Item {item_id} deleted"}
 
 
 if __name__ == "__main__":
