@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, request
 
 app = Flask(__name__)
 
@@ -15,6 +15,12 @@ def get_items():
         {"id": 2, "name": "Item 2", "description": "Second item"},
     ]
     return {"items": items}
+
+
+@app.route("/api/items", methods=["POST"])
+def create_item():
+    new_item = request.get_json()  # Get the new item from the request body
+    return {"item": new_item}, 201  # Return 201 status to indicate creation
 
 
 if __name__ == "__main__":
