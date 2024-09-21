@@ -3,11 +3,6 @@ from flask import Blueprint, request
 # * blueprint is solution for error "app not defined"
 bp_product = Blueprint("product", __name__)
 
-products = [
-    {"id": 1, "name": "product 1", "description": "First product", "price": 1000},
-    {"id": 2, "name": "product 2", "description": "Second product", "price": 2000},
-]
-
 
 @bp_product.route("/")
 def home():
