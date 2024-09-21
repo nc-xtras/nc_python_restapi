@@ -11,6 +11,7 @@ class ServProduct:
         MockProduct.products.append(new_product)
         return {"data": new_product}, 201  # Return 201 status to indicate creation
 
+    @staticmethod
     def get_product_by_id(product_id: int):
         product_by_id = next(
             (p for p in MockProduct.products if p["id"] == product_id), None
