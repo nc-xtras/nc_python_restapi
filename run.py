@@ -1,9 +1,6 @@
-from flask import Flask
-from app.routes import bp_product
+from app.app import initialize_app
 
-app = Flask(__name__)
-
-app.register_blueprint(bp_product)
+app = initialize_app()
 
 
 if __name__ == "__main__":
