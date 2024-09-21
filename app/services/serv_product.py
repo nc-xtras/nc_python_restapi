@@ -1,21 +1,20 @@
-products = [
-    {"id": 1, "name": "product 1", "description": "First product", "price": 1000},
-    {"id": 2, "name": "product 2", "description": "Second product", "price": 2000},
-]
+from app.mocks import MockProduct
 
 
 class ServProduct:
     @staticmethod
     def get_products():
-        return {"data": products}
+        return {"data": MockProduct.products}
 
     @staticmethod
     def create_product(new_product):
-        products.append(new_product)
+        MockProduct.products.append(new_product)
         return {"data": new_product}, 201  # Return 201 status to indicate creation
 
     def get_product_by_id(product_id: int):
-        product_by_id = next((p for p in products if p["id"] == product_id), None)
+        product_by_id = next(
+            (p for p in MockProduct.products if p["id"] == product_id), None
+        )
         if product_by_id:
             return {"data": product_by_id}
         else:
@@ -25,7 +24,9 @@ class ServProduct:
 
     @staticmethod
     def update_product(product_id: int, updated_product):
-        product_to_update = next((p for p in products if p["id"] == product_id), None)
+        product_to_update = next(
+            (p for p in MockProduct.products if p["id"] == product_id), None
+        )
 
         if product_to_update:
             # Perbarui atribut item yang ada
@@ -42,7 +43,9 @@ class ServProduct:
 
     @staticmethod
     def delete_product(product_id: int):
-        product_to_delete = next((p for p in products if p["id"] == product_id), None)
+        product_to_delete = next(
+            (p for p in MockProduct.products if p["id"] == product_id), None
+        )
         if product_to_delete:
-            products.remove(product_to_delete)
+            MockProduct.products.remove(product_to_delete)
         return {"message": f"Product {product_id} deleted"}
